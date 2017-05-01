@@ -43,18 +43,20 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W4 /GX /O2 /X /I ".\AStudio\Util" /I ".\GenesisSDK\Include" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /I "..\..\MsDev60\include" /I "..\..\MsDev60\mfc\include" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "VC_EXTRALEAN" /YX /FD /c
+# ADD CPP /nologo /MT /W4 /GX /O2 /I "..\..\Source\Actor" /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "VC_EXTRALEAN" /FD /c
+# SUBTRACT CPP /X /YX
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
-# ADD RSC /l 0x409 /x /d "NDEBUG"
+# ADD RSC /l 0x409 /d "NDEBUG"
+# SUBTRACT RSC /x
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 GenesisSDK\lib\genesis.lib ..\..\MSDEV60\MFC\lib\nafxcw.lib ..\..\MSDEV60\lib\libcmt.lib /nologo /subsystem:windows /machine:I386 /nodefaultlib
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib vfw32.lib dxguid.lib genesis.lib /nologo /subsystem:windows /machine:I386
+# SUBTRACT LINK32 /pdb:none /nodefaultlib
 
 !ELSEIF  "$(CFG)" == "AStudio - Win32 Debug"
 
@@ -70,19 +72,20 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /X /I ".\AStudio\Util" /I ".\GenesisSDK\Include" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /I "..\..\MsDev60\include" /I "..\..\MsDev60\mfc\include" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /YX /FD /c
-# SUBTRACT CPP /Fr
+# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /I "..\..\Source\Actor" /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /FD /c
+# SUBTRACT CPP /X /Fr /YX
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
-# ADD RSC /l 0x409 /x /d "_DEBUG"
+# ADD RSC /l 0x409 /d "_DEBUG"
+# SUBTRACT RSC /x
 BSC32=bscmake.exe
 # ADD BASE BSC32 /nologo
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 GenesisSDK\lib\genesisd.lib ..\..\MSDEV60\MFC\lib\nafxcwd.lib ..\..\MSDEV60\lib\libcmtd.lib /nologo /subsystem:windows /debug /machine:I386 /nodefaultlib /pdbtype:sept
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib vfw32.lib dxguid.lib genesisD.lib /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
+# SUBTRACT LINK32 /pdb:none /nodefaultlib
 
 !ENDIF 
 
@@ -364,22 +367,6 @@ SOURCE=.\AStudio\TextInputDlg.h
 SOURCE=.\AStudio\Util\Util.h
 # End Source File
 # End Group
-# Begin Group "Resource Files"
-
-# PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe"
-# Begin Source File
-
-SOURCE=.\AStudio\Res\Actview.bmp
-# End Source File
-# Begin Source File
-
-SOURCE=.\AStudio\Res\AStudio.ico
-# End Source File
-# Begin Source File
-
-SOURCE=.\AStudio\Res\AStudio.rc2
-# End Source File
-# End Group
 # Begin Group "Help Files"
 
 # PROP Default_Filter ""
@@ -430,73 +417,5 @@ SOURCE=.\AStudio\MakeHelp.bat
 
 # End Source File
 # End Group
-# Begin Group "msvc60"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Winspool.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Comctl32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Comdlg32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Ctl3d32s.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Gdi32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Kernel32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Oldnames.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Ole32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Oleaut32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Shell32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\User32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Uuid.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Winmm.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Advapi32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Urlmon.lib
-# End Source File
-# End Group
-# Begin Source File
-
-SOURCE=.\AStudio.mak
-# End Source File
 # End Target
 # End Project

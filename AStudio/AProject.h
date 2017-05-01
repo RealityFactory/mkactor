@@ -101,7 +101,7 @@ geBoolean AProject_AddMaterial
 	  const char *MaterialName,
 	  const ApjMaterialFormat Fmt,
 	  const char *TextureFilename,
-	  const float Red, const float Green, const float Blue, const float Alpha,
+	  const geFloat Red, const geFloat Green, const geFloat Blue, const geFloat Alpha,
 	  int *pIndex		// returned index
 	);
 
@@ -120,7 +120,7 @@ geBoolean AProject_SetMaterialTextureFilename (AProject *pProject, const int Ind
 
 GE_RGBA AProject_GetMaterialTextureColor (const AProject *pProject, const int Index);
 geBoolean AProject_SetMaterialTextureColor (AProject *pProject, const int Index, 
-	const float Red, const float Green, const float Blue, const float Alpha);
+	const geFloat Red, const geFloat Green, const geFloat Blue, const geFloat Alpha);
 
 
 // Motions section

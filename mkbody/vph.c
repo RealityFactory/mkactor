@@ -138,13 +138,13 @@ int vph_read_int(FILE *f,int *i)
 }
 
 
-int vph_read_float(FILE *f,float *flt)
+int vph_read_float(FILE *f,geFloat *flt)
 {
 	int cnt,size;
 	assert(f);
 	assert(flt);
 	size = sizeof(*flt);
-	assert( size == sizeof(float));
+	assert( size == sizeof(geFloat));
 	cnt = fread(flt,1,size,f);
 	if (cnt != size)
 		return 1;
@@ -204,7 +204,7 @@ void vph_report_int_array(int *array, int length)
 	}
 }
 
-void vph_report_float_array(float *array, int length)
+void vph_report_float_array(geFloat *array, int length)
 {
 	int i;
 
@@ -245,7 +245,7 @@ int vph_read_int_array(FILE *f,int *array, int length)
 }
 
 
-int vph_read_float_array(FILE *f,float *array, int length)
+int vph_read_float_array(FILE *f,geFloat *array, int length)
 {
 	int i,err;
 	
@@ -298,7 +298,7 @@ int vph_parse(FILE *f)
 		}
 
 	{
-		float matrix[12];
+		geFloat matrix[12];
 
 		log_output(vphlog,"Matrix:");
 		err = vph_read_float_array(f,matrix,12);
@@ -314,9 +314,9 @@ int vph_parse(FILE *f)
 		{
 			char string[1024];
 			int int_specifics[5];
-			float specifics32[32];
-			float matrix[12];
-			float specifics15[32];
+			geFloat specifics32[32];
+			geFloat matrix[12];
+			geFloat specifics15[32];
 			short specific;
 
 			log_output(vphlog,"link %ld",(long)li);		
@@ -337,7 +337,7 @@ int vph_parse(FILE *f)
 				}
 			vph_report_int_array(int_specifics,5);
 			
-			log_output(vphlog,"(physique specifics float*32)");
+			log_output(vphlog,"(physique specifics geFloat*32)");
 			err = vph_read_float_array(f,specifics32,32);
 			if (err != 0)
 				{
@@ -356,7 +356,7 @@ int vph_parse(FILE *f)
 				}
 			vph_report_float_array(matrix,12);
 			
-			log_output(vphlog,"(physique specifics float*15)");
+			log_output(vphlog,"(physique specifics geFloat*15)");
 			err = vph_read_float_array(f,specifics15,15);
 			if (err != 0)
 				{
@@ -407,7 +407,7 @@ int vph_parse(FILE *f)
 
 			for (i=0; i<4; i++)
 				{
-					float offsetTM[3];
+					geFloat offsetTM[3];
 					log_output(vphlog,"OffsetTM Row (%d):",i);
 					err = vph_read_float_array(f,offsetTM,3);
 					if (err != 0)
@@ -435,8 +435,8 @@ int vph_parse(FILE *f)
 				{
 					int rigid_link;
 					int deform_link;
-					float rigid[3];
-					float deform[3];
+					geFloat rigid[3];
+					geFloat deform[3];
 
 					err = vph_read_int(f,&rigid_link);			
 					if (err != 0)

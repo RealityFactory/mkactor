@@ -35,7 +35,7 @@
 
 #include "maxmath.h"
 
-float VERT_EQUALITY_TOLERANCE = 0.005f; // obtained empirically
+geFloat VERT_EQUALITY_TOLERANCE = 0.005f; // obtained empirically
 int fCount =0;		// face count for display
 
 #define MK_PI 3.141592654f
@@ -98,7 +98,7 @@ typedef struct
 
 typedef struct
 {
-	float tu, tv;
+	geFloat tu, tv;
 	int NAN;
 } V2TVertexDetail;
 
@@ -114,7 +114,7 @@ typedef struct
 {
 	geVec3d v;						// location
 	geVec3d n;						// normal
-	float tu, tv;					// texture coords
+	geFloat tu, tv;					// texture coords
 	int bone;						// bone index
 } VertexDetail;
 
@@ -1296,7 +1296,7 @@ MkBody_Material(MkBody_Options *options, const char *line, geBody *pBody, int i)
 	}
 	else if(strncmp(line, "(RGB)", 5) == 0)
 	{
-		float r, g, b;
+		geFloat r, g, b;
 		int j;
 		r=g=b=0.0f;
 		ptext = strrchr(line, ':');
@@ -2321,7 +2321,7 @@ ReturnCode MkBody_ParseOptionString(MkBody_Options* options,
 		case 'e':
 		case 'E':
 			// hidden feature to diddle with vector compare tolerance
-			VERT_EQUALITY_TOLERANCE = (float)atof(string + 2);
+			VERT_EQUALITY_TOLERANCE = (geFloat)atof(string + 2);
 			break;
 
 		case 'n':

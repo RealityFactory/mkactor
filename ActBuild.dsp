@@ -42,7 +42,8 @@ RSC=rc.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /MT /W4 /GX /O2 /X /I ".\AStudio" /I ".\AStudio\Util" /I ".\GenesisSDK\Include" /I ".\ActBuild" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /I "..\..\MsDev60\include" /D "NDEBUG" /D "WIN32" /D "_CONSOLE" /D "_MBCS" /D "ACTBUILD" /D "WIN32_LEAN_AND_MEAN" /YX /FD /c
+# ADD CPP /nologo /MT /W4 /GX /O2 /I "..\..\Source\Actor" /I ".\AStudio" /I ".\AStudio\Util" /I ".\ActBuild" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "NDEBUG" /D "WIN32" /D "_CONSOLE" /D "_MBCS" /D "ACTBUILD" /D "WIN32_LEAN_AND_MEAN" /FD /c
+# SUBTRACT CPP /X /YX
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
 # ADD RSC /l 0x409 /d "NDEBUG"
 BSC32=bscmake.exe
@@ -50,8 +51,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /machine:I386
-# ADD LINK32 GenesisSDK\lib\genesis.lib /nologo /subsystem:console /machine:I386 /nodefaultlib
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib vfw32.lib dxguid.lib genesis.lib /nologo /subsystem:console /machine:I386
+# SUBTRACT LINK32 /pdb:none /nodefaultlib
 
 !ELSEIF  "$(CFG)" == "ActBuild - Win32 Debug"
 
@@ -67,7 +68,8 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /YX /FD /c
-# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /X /I ".\AStudio" /I ".\AStudio\Util" /I ".\GenesisSDK\Include" /I ".\ActBuild" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /I "..\..\MsDev60\include" /D "_DEBUG" /D "WIN32" /D "_CONSOLE" /D "_MBCS" /D "ACTBUILD" /D "WIN32_LEAN_AND_MEAN" /YX /FD /c
+# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /I "..\..\Source\Actor" /I ".\AStudio" /I ".\AStudio\Util" /I ".\ActBuild" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "_DEBUG" /D "WIN32" /D "_CONSOLE" /D "_MBCS" /D "ACTBUILD" /D "WIN32_LEAN_AND_MEAN" /FD /c
+# SUBTRACT CPP /X /YX
 # ADD BASE RSC /l 0x409 /d "_DEBUG"
 # ADD RSC /l 0x409 /d "_DEBUG"
 BSC32=bscmake.exe
@@ -75,8 +77,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 GenesisSDK\lib\genesisd.lib /nologo /subsystem:console /debug /machine:I386 /nodefaultlib /pdbtype:sept
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib comctl32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib winmm.lib vfw32.lib dxguid.lib genesisD.lib /nologo /subsystem:console /debug /machine:I386 /pdbtype:sept
+# SUBTRACT LINK32 /pdb:none /nodefaultlib
 
 !ENDIF 
 
@@ -84,84 +86,6 @@ LINK32=link.exe
 
 # Name "ActBuild - Win32 Release"
 # Name "ActBuild - Win32 Debug"
-# Begin Group "MSVC"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Winspool.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Comdlg32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Gdi32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Kernel32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Libcmt.lib
-
-!IF  "$(CFG)" == "ActBuild - Win32 Release"
-
-!ELSEIF  "$(CFG)" == "ActBuild - Win32 Debug"
-
-# PROP Exclude_From_Build 1
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Libcmtd.lib
-
-!IF  "$(CFG)" == "ActBuild - Win32 Release"
-
-# PROP Exclude_From_Build 1
-
-!ELSEIF  "$(CFG)" == "ActBuild - Win32 Debug"
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Oldnames.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Shell32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\User32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Uuid.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Winmm.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Advapi32.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Urlmon.lib
-# End Source File
-# Begin Source File
-
-SOURCE=..\..\MSDev60\lib\Ole32.lib
-# End Source File
-# End Group
 # Begin Group "Makers"
 
 # PROP Default_Filter ""

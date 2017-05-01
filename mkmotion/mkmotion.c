@@ -46,7 +46,7 @@ typedef struct MkMotion_Options
 	MK_Boolean KeepStationary;
 	MK_Boolean Originate;
 	MK_Boolean Capitalize;
-	float TimeOffset;
+	geFloat TimeOffset;
 	geStrBlock* pMotionRoots;
 	char* pMotionName;
 	char EventBoneSeparator;
@@ -232,7 +232,7 @@ ReturnCode MkMotion_DoMake(MkMotion_Options* options,MkUtil_Printf Printf)
 	int j, k, Index, ParentIndex;
 	int NumBones=0;
 	int NumFrames, FramesPerSecond;
-	float SecondsPerFrame;
+	geFloat SecondsPerFrame;
 	char line[LINE_LENGTH];
 	char name[LINE_LENGTH];
 	geXForm3d InvAttach, KeyMatrix, TmpMatrix;
@@ -389,7 +389,7 @@ ReturnCode MkMotion_DoMake(MkMotion_Options* options,MkUtil_Printf Printf)
 	NumFrames -= j;
 	NumFrames++;
 
-	SecondsPerFrame = 1.0f / (float)FramesPerSecond;
+	SecondsPerFrame = 1.0f / (geFloat)FramesPerSecond;
 
 	// Allocate key data
 	pKeyInfo = CreateBoneKeyArray(NumBones, NumFrames);
@@ -690,7 +690,7 @@ ReturnCode MkMotion_DoMake(MkMotion_Options* options,MkUtil_Printf Printf)
 					strcat(line, name);
 				}
 
-				notetime = (float)noteframe * SecondsPerFrame + options->TimeOffset;
+				notetime = (geFloat)noteframe * SecondsPerFrame + options->TimeOffset;
 				// insert the note, but not past this frame
 				if(KEYMotion_InsertEventNoDuplicateTime(pMotion, notetime, notestring, SecondsPerFrame) == GE_FALSE)
 				{
@@ -764,7 +764,7 @@ ReturnCode MkMotion_DoMake(MkMotion_Options* options,MkUtil_Printf Printf)
 			geXForm3d_Orthonormalize(&TmpMatrix);
 			gePath_InsertKeyframe(	pPath,
 									GE_PATH_ROTATION_CHANNEL | GE_PATH_TRANSLATION_CHANNEL,
-									(float)j / (float)FramesPerSecond + options->TimeOffset,
+									(geFloat)j / (geFloat)FramesPerSecond + options->TimeOffset,
 									&TmpMatrix);
 		}
 
@@ -1047,17 +1047,17 @@ ReturnCode MkMotion_ParseOptionString(MkMotion_Options* options,
 				char* ptext1;
 				char* ptext2;
 
-				options->RootTranslation.X = (float)strtod(string + 2, &ptext1);
+				options->RootTranslation.X = (geFloat)strtod(string + 2, &ptext1);
 				if( (ptext1 == string + 2) || (*ptext1 != ',') )
 					goto PositionError;
 
 				ptext1++; // skip ','
-				options->RootTranslation.Y = (float)strtod(ptext1, &ptext2);
+				options->RootTranslation.Y = (geFloat)strtod(ptext1, &ptext2);
 				if( (ptext2 == ptext1) || (*ptext2 != ',') )
 					goto PositionError;
 
 				ptext2++; // skip ','
-				options->RootTranslation.Z = (float)strtod(ptext2, &ptext1);
+				options->RootTranslation.Z = (geFloat)strtod(ptext2, &ptext1);
 				if(ptext1 == ptext2)
 					goto PositionError;
 
@@ -1101,7 +1101,7 @@ PositionError:
 
 		case 't':
 		case 'T':
-			options->TimeOffset = (float)atof(string + 2);
+			options->TimeOffset = (geFloat)atof(string + 2);
 			break;
 
 		default:

@@ -36,7 +36,7 @@
 
 #define MATRIX_SIZE 4
 
-static geBoolean MaxMath_MatrixInverseGauss (float *Mat[]);
+static geBoolean MaxMath_MatrixInverseGauss (geFloat *Mat[]);
 
 // geXForm3d_Multiply causes the MSDEV50 compiler to choke when "global
 // optimizations" is turned on.  The result is that the compiler hangs
@@ -126,8 +126,8 @@ void MaxMath_Transform(const geXForm3d* M, const geVec3d* v, geVec3d* r)
 
 void MaxMath_GetInverse(const geXForm3d* A, geXForm3d* Inv)
 {
-	float AInv[MATRIX_SIZE+1][MATRIX_SIZE+1]; // 1 based
-	float* pARows[MATRIX_SIZE+1]; // 1 based
+	geFloat AInv[MATRIX_SIZE+1][MATRIX_SIZE+1]; // 1 based
+	geFloat* pARows[MATRIX_SIZE+1]; // 1 based
 
 	AInv[1][1] = A->AX;
 	AInv[1][2] = A->AY;
@@ -172,8 +172,8 @@ void MaxMath_GetInverse(const geXForm3d* A, geXForm3d* Inv)
 
 void MaxMath_InverseMultiply(const geXForm3d* A, const geXForm3d* B, geXForm3d* M)
 {
-	float BInv[MATRIX_SIZE+1][MATRIX_SIZE+1]; // 1 based
-	float* pBRows[MATRIX_SIZE+1]; // 1 based
+	geFloat BInv[MATRIX_SIZE+1][MATRIX_SIZE+1]; // 1 based
+	geFloat* pBRows[MATRIX_SIZE+1]; // 1 based
 	geXForm3d Product;
 
 	BInv[1][1] = B->AX;
@@ -265,7 +265,7 @@ void MaxMath_InverseMultiply(const geXForm3d* A, const geXForm3d* B, geXForm3d* 
 
 #define SWAP(a, b) { temp = (a); (a) = (b); (b) = temp; }
 
-static geBoolean MaxMath_MatrixInverseGauss(float *Mat[])
+static geBoolean MaxMath_MatrixInverseGauss(geFloat *Mat[])
 {
 	int i, j, k, l, ll;
 	int ColIndex[MATRIX_SIZE+1]; // 1 based
@@ -273,7 +273,7 @@ static geBoolean MaxMath_MatrixInverseGauss(float *Mat[])
 	int ipiv[MATRIX_SIZE+1];
 	int icol = 0;
 	int irow = 0;
-	float big, dum, pivinv, temp;
+	geFloat big, dum, pivinv, temp;
 
 	ipiv[1] = 0; ipiv[2] = 0; ipiv[3] = 0; ipiv[4] = 0;
 
@@ -290,7 +290,7 @@ static geBoolean MaxMath_MatrixInverseGauss(float *Mat[])
 					{
 						if (fabs(Mat[j][k]) >= big)
 						{
-							big = (float)fabs(Mat[j][k]);
+							big = (geFloat)fabs(Mat[j][k]);
 							irow = j;
 							icol = k;
 						}

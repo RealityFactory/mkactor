@@ -138,7 +138,7 @@ geMotion *MopShell_Optimize(geMotion *M, geFloat Tolerance,char *LogName,MkUtil_
 			if (timeGetTime() > LastTime+MILLISECONDS_BETWEEN_NOTIFICATIONS)
 			{
 					LastTime = timeGetTime();
-					Printf("\tCompression approximately %d%% complete\n", (int)(100.0f * (float)i/(float)Count));
+					Printf("\tCompression approximately %d%% complete\n", (int)(100.0f * (geFloat)i/(geFloat)Count));
 			}
 			if (MkUtil_Interrupt())
 				{

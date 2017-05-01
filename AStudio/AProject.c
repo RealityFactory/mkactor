@@ -607,10 +607,10 @@ static geBoolean AProject_ParseMaterial
 	strcpy (Name, NameStr);
 	strcpy (Filename, FilenameStr);
 
-	Color->r = (float)atof (rStr);
-	Color->g = (float)atof (gStr);
-	Color->b = (float)atof (bStr);
-	Color->a = (float)atof (aStr);
+	Color->r = (geFloat)atof (rStr);
+	Color->g = (geFloat)atof (gStr);
+	Color->b = (geFloat)atof (bStr);
+	Color->a = (geFloat)atof (aStr);
 
 	return GE_TRUE;
 }
@@ -1167,7 +1167,7 @@ geBoolean AProject_AddMaterial
 	  const char *MaterialName,
 	  const ApjMaterialFormat Fmt,
 	  const char *TextureFilename,
-	  const float Red, const float Green, const float Blue, const float Alpha,
+	  const geFloat Red, const geFloat Green, const geFloat Blue, const geFloat Alpha,
 	  int *pIndex		// returned index
 	)
 {
@@ -1332,7 +1332,7 @@ GE_RGBA AProject_GetMaterialTextureColor (const AProject *pProject, const int In
 }
 
 geBoolean AProject_SetMaterialTextureColor (AProject *pProject, const int Index, 
-	const float Red, const float Green, const float Blue, const float Alpha)
+	const geFloat Red, const geFloat Green, const geFloat Blue, const geFloat Alpha)
 {
 	ApjMaterialEntry *pEntry;
 

@@ -31,7 +31,7 @@ char *Util_Strdup (const char *s);
 geBoolean Util_SetString (char **ppString, const char *NewValue);
 
 geBoolean Util_IsValidInt (char const *Text, int *TheVal);
-geBoolean Util_IsValidFloat (const char *Text, float *TheFloat);
+geBoolean Util_IsValidFloat (const char *Text, geFloat *TheFloat);
 unsigned int Util_htoi (const char *s);
 void Util_QuoteString (const char *s, char *d);
 
