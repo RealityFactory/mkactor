@@ -36,15 +36,14 @@ RSC=rc.exe
 # PROP BASE Output_Dir "Release"
 # PROP BASE Intermediate_Dir "Release"
 # PROP BASE Target_Dir ""
-# PROP Use_MFC 4
+# PROP Use_MFC 5
 # PROP Use_Debug_Libraries 0
 # PROP Output_Dir "Release\AStudio\"
 # PROP Intermediate_Dir "Release\AStudio\"
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MT /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MT /W4 /GX /O2 /I "..\..\Source\Actor" /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "VC_EXTRALEAN" /FD /c
-# SUBTRACT CPP /X /YX
+# ADD CPP /nologo /MT /W4 /GX /O2 /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /Fo"Debug\AStudio\\" /Fd"Debug\AStudio\\" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /o "NUL" /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG"
@@ -72,7 +71,7 @@ LINK32=link.exe
 # PROP Ignore_Export_Lib 0
 # PROP Target_Dir ""
 # ADD BASE CPP /nologo /MTd /W3 /Gm /GX /Zi /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /I "..\..\Source\Actor" /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /FD /c
+# ADD CPP /nologo /MTd /W4 /Gm /GX /ZI /Od /I ".\AStudio\Util" /I ".\common" /I ".\fmtactor" /I ".\mkactor" /I ".\mkbody" /I ".\mkmotion" /I ".\mop" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "WIN32_LEAN_AND_MEAN" /FD /c
 # SUBTRACT CPP /X /Fr /YX
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /o "NUL" /win32
@@ -188,7 +187,8 @@ SOURCE=.\AStudio\AStudio.cpp
 
 SOURCE=.\AStudio\AStudio.rc
 # ADD BASE RSC /l 0x409 /i "AStudio"
-# ADD RSC /l 0x409 /x /i "AStudio" /i "..\..\msdev60\include" /i "..\..\msdev60\mfc\include"
+# ADD RSC /l 0x409 /i "AStudio"
+# SUBTRACT RSC /x
 # End Source File
 # Begin Source File
 

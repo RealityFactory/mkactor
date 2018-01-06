@@ -1237,11 +1237,11 @@ MkBody_Material(MkBody_Options *options, const char *line, geBody *pBody, int i)
 		{
 			geVFile *VF;
 			geBitmap *Bmp;
-			if (stricmp(name+strlen(name)-4,".BMP") != 0)
-				{
-					Printf("ERROR: Material %d does not reference a BMP.  '%s' \n",i,ptext);
-					return GE_FALSE;
-				}
+			//if (stricmp(name+strlen(name)-4,".BMP") != 0)
+				//{
+					//Printf("ERROR: Material %d does not reference a BMP.  '%s' \n",i,ptext);
+					//return GE_FALSE;
+				//}
 			VF = geVFile_OpenNewSystem(NULL,GE_VFILE_TYPE_DOS,name,NULL,GE_VFILE_OPEN_READONLY);
 			if (VF == NULL)
 				{
@@ -1255,11 +1255,14 @@ MkBody_Material(MkBody_Options *options, const char *line, geBody *pBody, int i)
 					Printf("ERROR: Material %d, unable to read bitmap '%s'\n",i,name);
 					return GE_FALSE;
 				}
-			if (geBitmap_SetColorKey(Bmp,GE_TRUE,255,GE_TRUE)==GE_FALSE)
+			if(!geBitmap_HasAlpha(Bmp))
+			{
+				if (geBitmap_SetColorKey(Bmp,GE_TRUE,0x00ff00fe,GE_TRUE)==GE_FALSE)
 				{
-					Printf("ERROR: Material %d, unable to set color keying (transparent color) to 255 for bitmap '%s'\n",i,name);
+					Printf("ERROR: Material %d, unable to set color keying (transparent color) to (255,0,254) for bitmap '%s'\n",i,name);
 					return GE_FALSE;
 				}
+			}
 			{
 				int W,H,TwoPower;
 				W = geBitmap_Width ( Bmp );
@@ -1528,6 +1531,7 @@ ReturnCode MkBody_DoMake(MkBody_Options* options,MkUtil_Printf PrintfCallback)
 				}
 			FGETS_LINE_OR_CLOSE_AND_RETURN(line);
 			StripNewLine(line);
+			Printf("add material %d ('%s')\n",i,line);
 			if (MkBody_Material(options,line,pBody,i)==GE_FALSE)
 				{
 					Printf("ERROR: Unable to add material %d ('%s')\n",i,line);
@@ -1544,6 +1548,7 @@ ReturnCode MkBody_DoMake(MkBody_Options* options,MkUtil_Printf PrintfCallback)
 				{
 					const char* MatLine;
 					MatLine = geStrBlock_GetString(options->ExtraMaterials,i-Count);
+					Printf("extra material %d ('%s')\n",i-Count,MatLine);
 					if (MkBody_Material( options, MatLine, pBody,i)==0)
 						{
 							Printf("ERROR: Unable to add extra material %d ('%s')\n",i-Count,MatLine);
